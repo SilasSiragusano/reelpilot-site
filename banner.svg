@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2048" height="1152" viewBox="0 0 2048 1152">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#101a2a"/>
+      <stop offset="1" stop-color="#070a0f"/>
+    </linearGradient>
+    <linearGradient id="fill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#22d39a" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#22d39a" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="2048" height="1152" fill="url(#bg)"/>
+  <!-- subtle equity-curve motif in the lower band (below the centred text safe-zone) -->
+  <path d="M0 900 L260 840 L440 870 L680 760 L900 810 L1160 705 L1420 760 L1680 665 L1900 705 L2048 645 L2048 1152 L0 1152 Z" fill="url(#fill)"/>
+  <path d="M0 900 L260 840 L440 870 L680 760 L900 810 L1160 705 L1420 760 L1680 665 L1900 705 L2048 645"
+        fill="none" stroke="#22d39a" stroke-width="6" stroke-opacity="0.45" stroke-linejoin="round" stroke-linecap="round"/>
+  <!-- centred brand text (inside the all-device safe area) -->
+  <text x="1024" y="540" text-anchor="middle" font-family="Helvetica, Arial, sans-serif"
+        font-weight="800" font-size="150" fill="#e9eff6">Backtest<tspan fill="#22d39a">Lab</tspan></text>
+  <text x="1024" y="612" text-anchor="middle" font-family="Helvetica, Arial, sans-serif"
+        font-weight="500" font-size="44" fill="#8b98a5" letter-spacing="3">Backtests, revealed in seconds  ·  not financial advice</text>
+</svg>

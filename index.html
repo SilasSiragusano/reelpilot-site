@@ -3,39 +3,150 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Reelpilot Studio</title>
+<title>BacktestLab — Honest trading backtests, visualized</title>
+<meta name="description" content="BacktestLab runs systematic trading backtests and turns the results into short, honest data videos — drawdowns included, never financial advice." />
+<link rel="icon" href="./icon.svg" type="image/svg+xml" />
 <style>
   :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
   body { margin:0; font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background: radial-gradient(120% 90% at 50% 0%, #0d1420 0%, #070a0f 70%); color:#e9eff6; }
-  .wrap { max-width: 760px; margin: 0 auto; padding: 80px 24px 120px; }
-  .logo { display:inline-flex; align-items:center; gap:12px; font-weight:800; font-size:22px; }
-  .dot { width:34px; height:34px; border-radius:9px; background:#22d39a; display:inline-block; }
-  h1 { font-size: 44px; line-height:1.1; margin: 40px 0 10px; }
-  p { color:#c3ccd6; line-height:1.6; font-size:18px; }
+    background: radial-gradient(120% 90% at 50% 0%, #0d1420 0%, #070a0f 70%) fixed; color:#e9eff6; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+  nav { display:flex; align-items:center; justify-content:space-between; padding: 22px 0; flex-wrap:wrap; gap:12px; }
+  .logo { display:inline-flex; align-items:center; gap:12px; font-weight:800; font-size:20px; }
+  .dot { width:30px; height:30px; border-radius:8px; background:#22d39a; display:inline-block; }
+  nav .links a { color:#c3ccd6; text-decoration:none; margin-left:20px; font-size:15px; }
+  nav .links a:hover { color:#22d39a; }
+  header.hero { padding: 70px 0 30px; }
+  h1 { font-size: 46px; line-height:1.1; margin: 0 0 14px; }
+  h2 { font-size: 30px; margin: 0 0 18px; }
+  p { color:#c3ccd6; line-height:1.65; font-size:17px; }
   .muted { color:#7d8b9a; }
   a { color:#22d39a; }
-  .card { background: rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);
-    border-radius:16px; padding:24px 28px; margin-top:28px; }
-  footer { margin-top:60px; color:#7d8b9a; font-size:14px; }
+  .green { color:#22d39a; } .red { color:#ff5c6c; }
+  section { padding: 46px 0; border-top: 1px solid rgba(255,255,255,0.06); }
+  .stats { display:grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap:16px; margin: 34px 0 8px; }
+  .stat { background: rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:18px; text-align:center; }
+  .stat b { display:block; font-size:30px; }
+  .stat span { color:#7d8b9a; font-size:13px; letter-spacing:1px; text-transform:uppercase; }
+  .videos { display:grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap:20px; margin-top: 8px; }
+  .videos .vid { aspect-ratio: 9/16; width:100%; border:1px solid rgba(255,255,255,0.1); border-radius:14px; overflow:hidden; background:#000; }
+  .videos iframe { width:100%; height:100%; border:0; }
+  .btn { display:inline-block; background:#22d39a; color:#06281d; font-weight:700; padding: 12px 22px; border-radius: 10px; text-decoration:none; margin-top: 18px; }
+  .steps { display:grid; gap:14px; margin-top: 10px; }
+  .step { background: rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:18px 20px; }
+  .step b { color:#e9eff6; }
+  details { background: rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding: 14px 18px; margin-top: 12px; }
+  summary { cursor:pointer; font-weight:600; }
+  details p { margin: 10px 0 2px; }
+  footer { padding: 44px 0 70px; color:#7d8b9a; font-size:14px; border-top:1px solid rgba(255,255,255,0.06); }
+  .disclaimer { background: rgba(255,92,108,0.08); border:1px solid rgba(255,92,108,0.25); border-radius:12px; padding: 14px 18px; margin-top: 26px; }
+  .disclaimer p { margin:0; font-size:15px; }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="logo"><span class="dot"></span> Reelpilot Studio</div>
-    <h1>Automated short-form video publishing</h1>
-    <p>Reelpilot Studio is a personal creator tool that produces short-form videos
-       (9:16) from the owner's own data and publishes them to the owner's own connected
-       social accounts. It is operated by an individual creator for their own channels.</p>
-    <div class="card">
-      <p style="margin:0"><strong>What it does</strong></p>
-      <p class="muted" style="margin:10px 0 0">Generates a video, then uses the official
-         TikTok Content Posting API to upload it to the account owner's own TikTok profile.
-         It does not access or collect data from other TikTok users.</p>
+<div class="wrap">
+  <nav>
+    <span class="logo"><span class="dot"></span> BacktestLab</span>
+    <span class="links">
+      <a href="#videos">Videos</a>
+      <a href="#how">How it works</a>
+      <a href="#principles">Principles</a>
+      <a href="#faq">FAQ</a>
+      <a href="./privacy.html">Privacy</a>
+      <a href="./terms.html">Terms</a>
+    </span>
+  </nav>
+
+  <header class="hero">
+    <h1>Honest trading backtests,<br />turned into data videos.</h1>
+    <p>BacktestLab runs systematic trading strategies against years of historical market data —
+       then turns each result into a short, animated video. The numbers are never cherry-picked
+       in isolation: every video shows win rate, drawdown <em>and</em> how the strategy performed
+       across <em>all</em> tested symbols, not just the winners.</p>
+    <div class="stats">
+      <div class="stat"><b>60</b><span>symbols tested</span></div>
+      <div class="stat"><b>99</b><span>backtest runs</span></div>
+      <div class="stat"><b class="red">45/99</b><span>runs profitable</span></div>
+      <div class="stat"><b class="green">2/day</b><span>new videos</span></div>
     </div>
-    <p style="margin-top:36px"><a href="./privacy.html">Privacy Policy</a> ·
-       <a href="./terms.html">Terms of Service</a></p>
-    <footer>Contact: siragusanosilas0@gmail.com · © 2026 Reelpilot Studio</footer>
-  </div>
+    <div class="disclaimer">
+      <p><strong>Not financial advice.</strong> Everything on this site and in our videos shows
+         backtested results on historical data. Past performance does not guarantee future results.</p>
+    </div>
+  </header>
+
+  <section id="videos">
+    <h2>Latest videos</h2>
+    <p class="muted">Fresh backtest reveals are published to our channels daily.</p>
+    <div class="videos">
+      <div class="vid"><iframe src="https://www.youtube.com/embed/jSHBhfe3jxs" title="NVDA backtest" allowfullscreen loading="lazy"></iframe></div>
+      <div class="vid"><iframe src="https://www.youtube.com/embed/Qn5T8y9wjY8" title="NVDA backtest (short cut)" allowfullscreen loading="lazy"></iframe></div>
+    </div>
+    <a class="btn" href="https://www.youtube.com/channel/UCLP72wtWrxyf-tDuTXpXfCg" target="_blank" rel="noopener">All videos on YouTube →</a>
+  </section>
+
+  <section id="how">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><b>1 · Backtest engine.</b> Our research system simulates trading strategies
+        on years of intraday market data — fixed position sizes, slippage included, every trade logged.</div>
+      <div class="step"><b>2 · Honest aggregation.</b> Each run is stored alongside all other runs of
+        the same strategy, so every video can state the full picture: how many symbols were tested
+        and how many actually made money.</div>
+      <div class="step"><b>3 · Video rendering.</b> The equity curve, stats and disclaimers are rendered
+        into a 9:16 short with voiceover and captions — fully data-driven, one video per backtest run.</div>
+      <div class="step"><b>4 · Publishing.</b> Finished videos are published to our own YouTube channel
+        and TikTok account (<a href="https://www.tiktok.com/@backtestlab59" target="_blank" rel="noopener">@backtestlab59</a>)
+        through the platforms' official APIs. The integration posts to our own accounts only.</div>
+    </div>
+  </section>
+
+  <section id="principles">
+    <h2>Principles</h2>
+    <p><strong class="green">Show the losers.</strong> Most strategy videos online show one lucky chart.
+       Every BacktestLab video includes the strategy's performance across all tested symbols —
+       including the ones that lost money.</p>
+    <p><strong class="green">Drawdowns on screen.</strong> Maximum drawdown is displayed in every video,
+       marked directly on the equity curve. If a strategy lost $18,000 on the way up, you'll see it.</p>
+    <p><strong class="green">Backtest ≠ promise.</strong> Every video carries a permanent on-screen and
+       spoken disclaimer. We publish research, not trading signals, and we sell nothing.</p>
+  </section>
+
+  <section id="faq">
+    <h2>FAQ</h2>
+    <details>
+      <summary>Is this financial advice?</summary>
+      <p>No. BacktestLab publishes backtested research results for educational and entertainment
+         purposes only. Nothing here is a recommendation to buy or sell any security.</p>
+    </details>
+    <details>
+      <summary>Where does the data come from?</summary>
+      <p>From our own research system, which simulates strategies on historical intraday market data
+         with fixed position sizing and slippage assumptions. Details are stated in each video.</p>
+    </details>
+    <details>
+      <summary>Why are the win rates so low?</summary>
+      <p>Trend-following strategies typically lose most trades and make up for it with a few large
+         winners. That asymmetry — not a high win rate — is what the videos explore.</p>
+    </details>
+    <details>
+      <summary>How does the TikTok/YouTube integration work?</summary>
+      <p>BacktestLab uses the official TikTok Content Posting API and YouTube Data API to publish
+         videos to our own accounts. There is no login area on this site and no third-party user
+         data is accessed or collected.</p>
+    </details>
+    <details>
+      <summary>Can I request a strategy?</summary>
+      <p>Yes — comment under any video. The most requested strategies get backtested next.</p>
+    </details>
+  </section>
+
+  <footer>
+    Contact: siragusanosilas0@gmail.com ·
+    <a href="./privacy.html">Privacy Policy</a> · <a href="./terms.html">Terms of Service</a><br />
+    © 2026 BacktestLab. Backtested results, not financial advice.
+  </footer>
+</div>
 </body>
 </html>
